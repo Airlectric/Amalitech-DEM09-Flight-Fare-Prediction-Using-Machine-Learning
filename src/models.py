@@ -21,67 +21,6 @@ def evaluate_model(y_true, y_pred):
     mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
     return {'MAE': mae, 'MSE': mse, 'RMSE': rmse, 'R2': r2, 'MAPE': mape}
 
-def train_linear_regression(X_train, y_train):
-    """Train a Linear Regression model."""
-    logger.info("Training Linear Regression model...")
-    model = LinearRegression()
-    model.fit(X_train, y_train)
-    logger.info("Linear Regression training completed")
-    return model
-
-def train_ridge_regression(X_train, y_train, alpha=1.0):
-    """Train a Ridge Regression model."""
-    logger.info(f"Training Ridge Regression model (alpha={alpha})...")
-    model = Ridge(alpha=alpha)
-    model.fit(X_train, y_train)
-    logger.info("Ridge Regression training completed")
-    return model
-
-def train_lasso_regression(X_train, y_train, alpha=1.0):
-    """Train a Lasso Regression model."""
-    logger.info(f"Training Lasso Regression model (alpha={alpha})...")
-    model = Lasso(alpha=alpha)
-    model.fit(X_train, y_train)
-    logger.info("Lasso Regression training completed")
-    return model
-
-def train_decision_tree(X_train, y_train, max_depth=10, min_samples_split=5, random_state=42):
-    """Train a Decision Tree Regressor."""
-    logger.info(f"Training Decision Tree model (max_depth={max_depth})...")
-    model = DecisionTreeRegressor(max_depth=max_depth, min_samples_split=min_samples_split, random_state=random_state)
-    model.fit(X_train, y_train)
-    logger.info("Decision Tree training completed")
-    return model
-
-def train_random_forest(X_train, y_train, n_estimators=100, max_depth=10, random_state=42):
-    """Train a Random Forest Regressor."""
-    logger.info(f"Training Random Forest model (n_estimators={n_estimators}, max_depth={max_depth})...")
-    model = RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state, n_jobs=-1)
-    model.fit(X_train, y_train)
-    logger.info("Random Forest training completed")
-    return model
-
-def train_gradient_boosting(X_train, y_train, n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42):
-    """Train a Gradient Boosting Regressor."""
-    logger.info(f"Training Gradient Boosting model (n_estimators={n_estimators}, max_depth={max_depth}, lr={learning_rate})...")
-    model = GradientBoostingRegressor(n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=random_state)
-    model.fit(X_train, y_train)
-    logger.info("Gradient Boosting training completed")
-    return model
-
-def train_xgboost(X_train, y_train, n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42):
-    """Train an XGBoost Regressor."""
-    try:
-        from xgboost import XGBRegressor
-        logger.info(f"Training XGBoost model (n_estimators={n_estimators}, max_depth={max_depth}, lr={learning_rate})...")
-        model = XGBRegressor(n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=random_state, n_jobs=-1, verbosity=0)
-        model.fit(X_train, y_train)
-        logger.info("XGBoost training completed")
-        return model
-    except ImportError:
-        logger.warning("XGBoost not installed. Skipping XGBoost model.")
-        return None
-
 def cross_validate_model(model, X_train, y_train, cv=5, scoring='r2'):
     """Perform cross-validation on a model."""
     logger.info(f"Performing {cv}-fold cross-validation...")
@@ -101,7 +40,6 @@ def plot_actual_vs_predicted(y_true, y_pred, model_name="Model"):
     plt.legend()
     plt.tight_layout()
     plt.show()
-    logger.info(f"Plotted actual vs predicted for {model_name}")
 
 def plot_residuals(y_true, y_pred, model_name="Model"):
     """Residual plot (predicted vs residuals) to check for patterns."""
@@ -114,7 +52,6 @@ def plot_residuals(y_true, y_pred, model_name="Model"):
     plt.title(f'{model_name}: Residual Analysis')
     plt.tight_layout()
     plt.show()
-    logger.info(f"Plotted residuals for {model_name}")
 
 def get_linear_coefficients(model, feature_names):
     """Extract and sort coefficients from linear models."""
@@ -122,7 +59,6 @@ def get_linear_coefficients(model, feature_names):
         coef_df = pd.DataFrame({'Feature': feature_names, 'Coefficient': model.coef_})
         coef_df['Abs_Coefficient'] = np.abs(coef_df['Coefficient'])
         coef_df = coef_df.sort_values('Abs_Coefficient', ascending=False)
-        logger.info(f"Extracted {len(coef_df)} coefficients from {model.__class__.__name__}")
         return coef_df
     else:
         logger.warning(f"Model {model.__class__.__name__} does not have coefficients")
@@ -145,13 +81,11 @@ def plot_linear_coefficients(model, feature_names, model_name="Model", top_n=20)
     plt.gca().invert_yaxis()
     plt.tight_layout()
     plt.show()
-    logger.info(f"Plotted top {top_n} coefficients for {model_name}")
 
 def get_feature_importance(model, feature_names):
     """Extract feature importance from tree-based models."""
     if hasattr(model, 'feature_importances_'):
         importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': model.feature_importances_}).sort_values('Importance', ascending=False)
-        logger.info(f"Extracted feature importances from {model.__class__.__name__}")
         return importance_df
     else:
         logger.warning(f"Model {model.__class__.__name__} does not have feature importances")
@@ -172,35 +106,252 @@ def plot_feature_importance(model, feature_names, model_name="Model", top_n=20):
     plt.gca().invert_yaxis()
     plt.tight_layout()
     plt.show()
-    logger.info(f"Plotted top {top_n} feature importances for {model_name}")
 
-def train_and_evaluate(X_train, X_test, y_train, y_test):
-    """Train multiple baseline models and return evaluation results."""
-    models = {
-        'Linear Regression': train_linear_regression,
-        'Ridge Regression': train_ridge_regression,
-        'Lasso Regression': train_lasso_regression,
-        'Decision Tree': train_decision_tree,
-        'Random Forest': train_random_forest,
-        'Gradient Boosting': train_gradient_boosting,
-        'XGBoost': train_xgboost
+
+# =============================================================================
+# Individual Model Training and Evaluation Functions
+# =============================================================================
+
+def train_and_evaluate_linear_regression(X_train, X_test, y_train, y_test, feature_names):
+    """Train and evaluate Linear Regression model."""
+    logger.info("=" * 60)
+    logger.info("TRAINING: Linear Regression")
+    logger.info("=" * 60)
+    
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
+    
+    train_metrics = evaluate_model(y_train, y_pred_train)
+    test_metrics = evaluate_model(y_test, y_pred_test)
+    cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+    
+    logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+    logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+    logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+    
+    results = {
+        'Model': 'Linear Regression',
+        'Train_R2': train_metrics['R2'],
+        'Test_R2': test_metrics['R2'],
+        'Train_RMSE': train_metrics['RMSE'],
+        'Test_RMSE': test_metrics['RMSE'],
+        'Train_MAE': train_metrics['MAE'],
+        'Test_MAE': test_metrics['MAE'],
+        'Test_MAPE': test_metrics['MAPE'],
+        'CV_R2_Mean': cv_results['cv_mean'],
+        'CV_R2_Std': cv_results['cv_std']
     }
-    results = []
-    for name, train_func in models.items():
-        logger.info(f"\n{'='*50}")
-        logger.info(f"Training: {name}")
-        logger.info(f"{'='*50}")
-        model = train_func(X_train, y_train)
-        if model is None:
-            continue
+    
+    return model, y_pred_test, results
+
+
+def train_and_evaluate_ridge(X_train, X_test, y_train, y_test, feature_names, alpha=1.0):
+    """Train and evaluate Ridge Regression model."""
+    logger.info("=" * 60)
+    logger.info(f"TRAINING: Ridge Regression (alpha={alpha})")
+    logger.info("=" * 60)
+    
+    model = Ridge(alpha=alpha)
+    model.fit(X_train, y_train)
+    
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
+    
+    train_metrics = evaluate_model(y_train, y_pred_train)
+    test_metrics = evaluate_model(y_test, y_pred_test)
+    cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+    
+    logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+    logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+    logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+    
+    results = {
+        'Model': 'Ridge Regression',
+        'Train_R2': train_metrics['R2'],
+        'Test_R2': test_metrics['R2'],
+        'Train_RMSE': train_metrics['RMSE'],
+        'Test_RMSE': test_metrics['RMSE'],
+        'Train_MAE': train_metrics['MAE'],
+        'Test_MAE': test_metrics['MAE'],
+        'Test_MAPE': test_metrics['MAPE'],
+        'CV_R2_Mean': cv_results['cv_mean'],
+        'CV_R2_Std': cv_results['cv_std']
+    }
+    
+    return model, y_pred_test, results
+
+
+def train_and_evaluate_lasso(X_train, X_test, y_train, y_test, feature_names, alpha=1.0):
+    """Train and evaluate Lasso Regression model."""
+    logger.info("=" * 60)
+    logger.info(f"TRAINING: Lasso Regression (alpha={alpha})")
+    logger.info("=" * 60)
+    
+    model = Lasso(alpha=alpha)
+    model.fit(X_train, y_train)
+    
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
+    
+    train_metrics = evaluate_model(y_train, y_pred_train)
+    test_metrics = evaluate_model(y_test, y_pred_test)
+    cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+    
+    logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+    logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+    logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+    
+    results = {
+        'Model': 'Lasso Regression',
+        'Train_R2': train_metrics['R2'],
+        'Test_R2': test_metrics['R2'],
+        'Train_RMSE': train_metrics['RMSE'],
+        'Test_RMSE': test_metrics['RMSE'],
+        'Train_MAE': train_metrics['MAE'],
+        'Test_MAE': test_metrics['MAE'],
+        'Test_MAPE': test_metrics['MAPE'],
+        'CV_R2_Mean': cv_results['cv_mean'],
+        'CV_R2_Std': cv_results['cv_std']
+    }
+    
+    return model, y_pred_test, results
+
+
+def train_and_evaluate_decision_tree(X_train, X_test, y_train, y_test, feature_names, max_depth=10, min_samples_split=5, random_state=42):
+    """Train and evaluate Decision Tree model."""
+    logger.info("=" * 60)
+    logger.info(f"TRAINING: Decision Tree (max_depth={max_depth})")
+    logger.info("=" * 60)
+    
+    model = DecisionTreeRegressor(max_depth=max_depth, min_samples_split=min_samples_split, random_state=random_state)
+    model.fit(X_train, y_train)
+    
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
+    
+    train_metrics = evaluate_model(y_train, y_pred_train)
+    test_metrics = evaluate_model(y_test, y_pred_test)
+    cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+    
+    logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+    logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+    logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+    
+    results = {
+        'Model': 'Decision Tree',
+        'Train_R2': train_metrics['R2'],
+        'Test_R2': test_metrics['R2'],
+        'Train_RMSE': train_metrics['RMSE'],
+        'Test_RMSE': test_metrics['RMSE'],
+        'Train_MAE': train_metrics['MAE'],
+        'Test_MAE': test_metrics['MAE'],
+        'Test_MAPE': test_metrics['MAPE'],
+        'CV_R2_Mean': cv_results['cv_mean'],
+        'CV_R2_Std': cv_results['cv_std']
+    }
+    
+    return model, y_pred_test, results
+
+
+def train_and_evaluate_random_forest(X_train, X_test, y_train, y_test, feature_names, n_estimators=100, max_depth=10, random_state=42):
+    """Train and evaluate Random Forest model."""
+    logger.info("=" * 60)
+    logger.info(f"TRAINING: Random Forest (n_estimators={n_estimators}, max_depth={max_depth})")
+    logger.info("=" * 60)
+    
+    model = RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state, n_jobs=-1)
+    model.fit(X_train, y_train)
+    
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
+    
+    train_metrics = evaluate_model(y_train, y_pred_train)
+    test_metrics = evaluate_model(y_test, y_pred_test)
+    cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+    
+    logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+    logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+    logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+    
+    results = {
+        'Model': 'Random Forest',
+        'Train_R2': train_metrics['R2'],
+        'Test_R2': test_metrics['R2'],
+        'Train_RMSE': train_metrics['RMSE'],
+        'Test_RMSE': test_metrics['RMSE'],
+        'Train_MAE': train_metrics['MAE'],
+        'Test_MAE': test_metrics['MAE'],
+        'Test_MAPE': test_metrics['MAPE'],
+        'CV_R2_Mean': cv_results['cv_mean'],
+        'CV_R2_Std': cv_results['cv_std']
+    }
+    
+    return model, y_pred_test, results
+
+
+def train_and_evaluate_gradient_boosting(X_train, X_test, y_train, y_test, feature_names, n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42):
+    """Train and evaluate Gradient Boosting model."""
+    logger.info("=" * 60)
+    logger.info(f"TRAINING: Gradient Boosting (n_estimators={n_estimators}, max_depth={max_depth}, lr={learning_rate})")
+    logger.info("=" * 60)
+    
+    model = GradientBoostingRegressor(n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=random_state)
+    model.fit(X_train, y_train)
+    
+    y_pred_train = model.predict(X_train)
+    y_pred_test = model.predict(X_test)
+    
+    train_metrics = evaluate_model(y_train, y_pred_train)
+    test_metrics = evaluate_model(y_test, y_pred_test)
+    cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+    
+    logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+    logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+    logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+    
+    results = {
+        'Model': 'Gradient Boosting',
+        'Train_R2': train_metrics['R2'],
+        'Test_R2': test_metrics['R2'],
+        'Train_RMSE': train_metrics['RMSE'],
+        'Test_RMSE': test_metrics['RMSE'],
+        'Train_MAE': train_metrics['MAE'],
+        'Test_MAE': test_metrics['MAE'],
+        'Test_MAPE': test_metrics['MAPE'],
+        'CV_R2_Mean': cv_results['cv_mean'],
+        'CV_R2_Std': cv_results['cv_std']
+    }
+    
+    return model, y_pred_test, results
+
+
+def train_and_evaluate_xgboost(X_train, X_test, y_train, y_test, feature_names, n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42):
+    """Train and evaluate XGBoost model."""
+    logger.info("=" * 60)
+    logger.info(f"TRAINING: XGBoost (n_estimators={n_estimators}, max_depth={max_depth}, lr={learning_rate})")
+    logger.info("=" * 60)
+    
+    try:
+        from xgboost import XGBRegressor
+        model = XGBRegressor(n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=random_state, n_jobs=-1, verbosity=0)
+        model.fit(X_train, y_train)
+        
         y_pred_train = model.predict(X_train)
         y_pred_test = model.predict(X_test)
+        
         train_metrics = evaluate_model(y_train, y_pred_train)
         test_metrics = evaluate_model(y_test, y_pred_test)
-        cv_results = cross_validate_model(model, X_train, y_train, cv=5, scoring='r2')
-        logger.info(f"{name} - Test R2: {test_metrics['R2']:.4f}, Test RMSE: {test_metrics['RMSE']:.2f}")
-        results.append({
-            'Model': name,
+        cv_results = cross_validate_model(model, X_train, y_train, cv=5)
+        
+        logger.info(f"Training Complete - R2: {train_metrics['R2']:.4f}")
+        logger.info(f"Test Results - R2: {test_metrics['R2']:.4f}, RMSE: {test_metrics['RMSE']:.2f}, MAE: {test_metrics['MAE']:.2f}")
+        logger.info(f"Cross-Validation R2: {cv_results['cv_mean']:.4f} (+/- {cv_results['cv_std']:.4f})")
+        
+        results = {
+            'Model': 'XGBoost',
             'Train_R2': train_metrics['R2'],
             'Test_R2': test_metrics['R2'],
             'Train_RMSE': train_metrics['RMSE'],
@@ -210,11 +361,50 @@ def train_and_evaluate(X_train, X_test, y_train, y_test):
             'Test_MAPE': test_metrics['MAPE'],
             'CV_R2_Mean': cv_results['cv_mean'],
             'CV_R2_Std': cv_results['cv_std']
-        })
-    results_df = pd.DataFrame(results)
-    results_df = results_df.sort_values('Test_R2', ascending=False)
-    logger.info(f"\n{'='*50}")
-    logger.info("Model Comparison Results (sorted by Test R2)")
-    logger.info(f"{'='*50}")
+        }
+        
+        return model, y_pred_test, results
+    except ImportError:
+        logger.warning("XGBoost not installed. Skipping XGBoost model.")
+        return None, None, None
+
+
+def compare_all_models(X_train, X_test, y_train, y_test, feature_names):
+    """Train all models and return comparison results."""
+    logger.info("=" * 60)
+    logger.info("TRAINING ALL MODELS FOR COMPARISON")
+    logger.info("=" * 60)
+    
+    all_results = []
+    
+    _, lr_pred, lr_results = train_and_evaluate_linear_regression(X_train, X_test, y_train, y_test, feature_names)
+    all_results.append(lr_results)
+    
+    _, ridge_pred, ridge_results = train_and_evaluate_ridge(X_train, X_test, y_train, y_test, feature_names)
+    all_results.append(ridge_results)
+    
+    _, lasso_pred, lasso_results = train_and_evaluate_lasso(X_train, X_test, y_train, y_test, feature_names)
+    all_results.append(lasso_results)
+    
+    _, dt_pred, dt_results = train_and_evaluate_decision_tree(X_train, X_test, y_train, y_test, feature_names)
+    all_results.append(dt_results)
+    
+    _, rf_pred, rf_results = train_and_evaluate_random_forest(X_train, X_test, y_train, y_test, feature_names)
+    all_results.append(rf_results)
+    
+    _, gb_pred, gb_results = train_and_evaluate_gradient_boosting(X_train, X_test, y_train, y_test, feature_names)
+    all_results.append(gb_results)
+    
+    xgb_model, xgb_pred, xgb_results = train_and_evaluate_xgboost(X_train, X_test, y_train, y_test, feature_names)
+    if xgb_results is not None:
+        all_results.append(xgb_results)
+    
+    results_df = pd.DataFrame(all_results)
+    results_df = results_df.sort_values('Test_R2', ascending=False).reset_index(drop=True)
+    
+    logger.info("=" * 60)
+    logger.info("MODEL COMPARISON RESULTS (sorted by Test R2)")
+    logger.info("=" * 60)
     logger.info(f"\n{results_df.to_string(index=False)}")
+    
     return results_df

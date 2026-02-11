@@ -37,7 +37,7 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
                 mode_val = df[col].mode()[0] if len(df[col].mode()) > 0 else 'Unknown'
                 imputed_count = df[col].isnull().sum()
                 df[col] = df[col].fillna(mode_val)
-                logger.info(f"Imputed {imputed_count} missing values in '{col}' with mode: {mode_val}")
+                logger.info(f"Imputed {imputed_count} missing values in '{col}' with mode")
     
     return df
 
@@ -91,7 +91,7 @@ def validate_and_convert_dtypes(df: pd.DataFrame) -> pd.DataFrame:
     date_cols = [col for col in df.columns if 'date' in col.lower()]
     for col in date_cols:
         if col in df.columns:
-            df[col] = pd.to_datetime(df[col], errors='coerce')
+            df[col] = pd.to_datetime(df[col], errors='coerce', dayfirst=True)
             logger.info(f"Converted '{col}' to datetime")
     
     return df

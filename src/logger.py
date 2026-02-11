@@ -35,6 +35,5 @@ def get_logger(name: str, log_file: str = "logs/pipeline.log") -> logging.Logger
         ch.setFormatter(ch_format)
 
         logger.addHandler(fh)
-        logger.addHandler(ch)
 
     return logger

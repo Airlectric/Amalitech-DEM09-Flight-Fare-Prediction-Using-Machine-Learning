@@ -138,7 +138,7 @@ def compute_kpis(df: pd.DataFrame) -> dict:
     
     if 'Route' in df.columns:
         route_counts = df['Route'].value_counts()
-        kpis['most_popular_route'] = route_counts.idxmax()
+        kpis['most_popular_route'] = str(route_counts.idxmax())  # Convert to string for logging
         kpis['popular_route_count'] = int(route_counts.max())
     
     if 'Date_of_Journey' in df.columns:

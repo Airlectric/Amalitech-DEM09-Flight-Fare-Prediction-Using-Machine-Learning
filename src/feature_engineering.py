@@ -53,6 +53,14 @@ def create_date_features(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("Created date features: Month, Day, Weekday, Hour, Season")
     return df
 
+def drop_datetime_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Drop datetime columns that cannot be used in modeling."""
+    datetime_cols = df.select_dtypes(include=['datetime', 'datetimetz', 'datetime64']).columns.tolist()
+    if datetime_cols:
+        logger.info(f"Dropping datetime columns: {datetime_cols}")
+        df = df.drop(columns=datetime_cols)
+    return df
+
 def encode_categorical_features(df: pd.DataFrame, strategy: str = 'onehot') -> pd.DataFrame:
     """Encode categorical columns using one-hot or label encoding."""
     logger.info(f"Encoding categorical features using '{strategy}' strategy")
@@ -119,22 +127,23 @@ def split_data(df: pd.DataFrame, target_col: str = None, test_size: float = 0.2,
 def run_feature_pipeline(df: pd.DataFrame, target_col: str = None) -> tuple:
     """Master function: date features -> encoding -> scaling -> splitting."""
     logger.info("Starting feature engineering pipeline...")
-    
+
     df = create_date_features(df)
+    df = drop_datetime_columns(df)
     df = encode_categorical_features(df, strategy='onehot')
-    
+
     price_col = get_price_column(df) if target_col is None else target_col
-    
+
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
     if price_col in numeric_cols:
         numeric_cols.remove(price_col)
-    
+
     df_scaled, scaler = scale_numerical_features(df, columns=numeric_cols, scaler_type='standard')
-    
+
     X_train, X_test, y_train, y_test = split_data(df_scaled, target_col=price_col)
-    
+
     feature_names = X_train.columns.tolist()
     logger.info(f"Total features after engineering: {len(feature_names)}")
-    
+
     logger.info("Feature engineering pipeline completed")
     return X_train, X_test, y_train, y_test, scaler, feature_names

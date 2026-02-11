@@ -6,6 +6,14 @@ from src.logger import get_logger
 
 logger = get_logger(__name__)
 
+def get_price_column(df: pd.DataFrame) -> str:
+    """Detect the price/fare column in the dataset."""
+    price_candidates = ['Total Fare (BDT)', 'Base Fare (BDT)', 'Price', 'price']
+    for col in price_candidates:
+        if col in df.columns:
+            return col
+    raise ValueError(f"No price column found. Available columns: {df.columns.tolist()}")
+
 def drop_irrelevant_columns(df: pd.DataFrame, columns: list = None) -> pd.DataFrame:
     """Drop unnamed/index/irrelevant columns. Log which columns were dropped."""
     if columns is None:
@@ -17,12 +25,7 @@ def drop_irrelevant_columns(df: pd.DataFrame, columns: list = None) -> pd.DataFr
     return df
 
 def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Impute missing values:
-    - Numerical columns: median imputation
-    - Categorical columns: mode imputation
-    Log the number of imputed values per column.
-    """
+    """Impute missing values: numerical columns with median, categorical with mode."""
     missing_before = df.isnull().sum()
     logger.info(f"Missing values before imputation:\n{missing_before[missing_before > 0]}")
     
@@ -42,29 +45,26 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def fix_invalid_entries(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    - Remove or replace negative fares/base fares.
-    - Normalize inconsistent city names (e.g., 'Dhaka' vs 'Dacca').
-    - Log all corrections made.
-    """
+    """Remove or replace negative fares. Normalize inconsistent city names."""
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     
-    for col in numeric_cols:
-        if 'fare' in col.lower() or 'price' in col.lower():
-            negative_count = (df[col] < 0).sum()
-            if negative_count > 0:
-                logger.warning(f"Found {negative_count} negative values in '{col}'. Setting to 0.")
-                df.loc[df[col] < 0, col] = 0
+    price_col = get_price_column(df)
+    if price_col in numeric_cols:
+        negative_count = (df[price_col] < 0).sum()
+        if negative_count > 0:
+            logger.warning(f"Found {negative_count} negative values in '{price_col}'. Setting to 0.")
+            df.loc[df[price_col] < 0, price_col] = 0
     
     city_mappings = {
         'Dacca': 'Dhaka',
         'Calcutta': 'Kolkata',
         'Bombay': 'Mumbai',
         'Madras': 'Chennai',
-        'Bangalore': 'Bengaluru'
+        'Bangalore': 'Bengaluru',
+        'Banglore': 'Bengaluru'
     }
     
-    city_cols = ['Source', 'Destination']
+    city_cols = ['Source', 'Source Name', 'Destination', 'Destination Name']
     for col in city_cols:
         if col in df.columns:
             for old_name, new_name in city_mappings.items():
@@ -76,19 +76,13 @@ def fix_invalid_entries(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def validate_and_convert_dtypes(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    - Convert fare columns to float.
-    - Convert date columns to datetime.
-    - Log dtype conversions.
-    """
-    fare_cols = [col for col in df.columns if 'fare' in col.lower() or 'price' in col.lower() or 'tax' in col.lower()]
+    """Convert fare columns to float, date columns to datetime."""
+    price_col = get_price_column(df)
+    if price_col in df.columns:
+        df[price_col] = pd.to_numeric(df[price_col], errors='coerce').astype(float)
+        logger.info(f"Converted '{price_col}' to float")
     
-    for col in fare_cols:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce').astype(float)
-            logger.info(f"Converted '{col}' to float")
-    
-    date_cols = [col for col in df.columns if 'date' in col.lower()]
+    date_cols = ['Departure Date & Time', 'Date_of_Journey', 'Arrival Date & Time']
     for col in date_cols:
         if col in df.columns:
             df[col] = pd.to_datetime(df[col], errors='coerce', dayfirst=True)
@@ -107,11 +101,7 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def clean_dataset(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Master cleaning function that calls all above functions in sequence.
-    Returns the cleaned DataFrame.
-    Log the shape before and after cleaning.
-    """
+    """Master cleaning function. Returns the cleaned DataFrame."""
     logger.info(f"Starting data cleaning. Original shape: {df.shape}")
     
     df = drop_irrelevant_columns(df)

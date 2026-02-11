@@ -153,7 +153,9 @@ def compute_kpis(df: pd.DataFrame) -> dict:
         kpis['top_5_expensive_routes'] = route_prices.head(5).to_dict()
     
     for key, value in kpis.items():
-        logger.info(f"KPI - {key}: {value}")
+        # Convert any Unicode characters to ASCII for safe logging
+        safe_value = str(value).replace('→', '->').replace('–', '-')
+        logger.info(f"KPI - {key}: {safe_value}")
     
     return kpis
 

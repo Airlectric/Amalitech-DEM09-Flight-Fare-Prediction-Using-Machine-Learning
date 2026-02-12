@@ -124,10 +124,29 @@ def split_data(df: pd.DataFrame, target_col: str = None, test_size: float = 0.2,
     
     return X_train, X_test, y_train, y_test
 
-def run_feature_pipeline(df: pd.DataFrame, target_col: str = None) -> tuple:
-    """Master function: date features -> encoding -> scaling -> splitting."""
-    logger.info("Starting feature engineering pipeline...")
+def remove_data_leakage_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Remove features that cause data leakage (direct components of target variable).
+    
+    Base Fare and Tax & Surcharge directly sum to Total Fare, so including them
+    as features would allow the model to trivially predict the target.
+    """
+    leakage_cols = ['Base Fare (BDT)', 'Tax & Surcharge (BDT)']
+    cols_to_remove = [col for col in leakage_cols if col in df.columns]
+    
+    if cols_to_remove:
+        logger.warning(f"REMOVING DATA LEAKAGE COLUMNS: {cols_to_remove}")
+        logger.warning("These columns directly sum to Total Fare and would make prediction trivial")
+        df = df.drop(columns=cols_to_remove)
+    
+    return df
 
+def run_feature_pipeline(df: pd.DataFrame, target_col: str = None) -> tuple:
+    """Master function: date features -> remove leakage -> encoding -> scaling -> splitting."""
+    logger.info("Starting feature engineering pipeline...")
+    
+    # CRITICAL: Remove data leakage features first
+    df = remove_data_leakage_features(df)
+    
     df = create_date_features(df)
     df = drop_datetime_columns(df)
     df = encode_categorical_features(df, strategy='onehot')

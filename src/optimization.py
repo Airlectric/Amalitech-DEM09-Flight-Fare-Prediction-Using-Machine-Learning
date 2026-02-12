@@ -125,8 +125,7 @@ def compare_regularization(X_train, y_train, X_test, y_test, alphas=None, cv=3):
                 'CV_R2_Mean': cv_scores.mean(), 'CV_R2_Std': cv_scores.std()
             })
     results_df = pd.DataFrame(all_results)
-    logger.info(f"Regularization comparison:
-{results_df.to_string(index=False)}")
+    logger.info(f"Regularization comparison:{results_df.to_string(index=False)}")
     return results_df
 
 def plot_regularization_effect(reg_results):

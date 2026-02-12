@@ -1292,3 +1292,339 @@ Gradient Boosting  0.999984 0.999973  331.232701  420.422003  209.485394  228.07
  Lasso Regression  0.996750 0.996875 4662.893901 4563.888947 1730.240966 1709.290654   7.517672    0.996725   0.000159
  Ridge Regression  0.996756 0.996871 4659.194467 4566.925463 1739.134159 1723.420644   7.536087    0.996723   0.000160
 Linear Regression  0.996756 0.996871 4659.027051 4566.963051 1737.515599 1721.621667   7.529015    0.996724   0.000159
+2026-02-12 10:20:37 | src.data_loader | INFO | Loading dataset from: C:\Users\DanielAgudeyDoe\Desktop\Lib\Course Projects\Amalitech-Machine-Learning\project\data\raw\Flight_Price_Dataset_of_Bangladesh.csv
+2026-02-12 10:20:38 | src.data_loader | INFO | Dataset loaded successfully: 57000 rows, 17 columns
+2026-02-12 10:20:38 | src.data_loader | INFO | Inspecting dataset...
+2026-02-12 10:20:38 | src.data_loader | INFO | Shape: (57000, 17)
+2026-02-12 10:20:38 | src.data_loader | INFO | Data types:
+Airline                      str
+Source                       str
+Source Name                  str
+Destination                  str
+Destination Name             str
+Departure Date & Time        str
+Arrival Date & Time          str
+Duration (hrs)           float64
+Stopovers                    str
+Aircraft Type                str
+Class                        str
+Booking Source               str
+Base Fare (BDT)          float64
+Tax & Surcharge (BDT)    float64
+Total Fare (BDT)         float64
+Seasonality                  str
+Days Before Departure      int64
+dtype: object
+2026-02-12 10:20:38 | src.data_loader | INFO | Missing values:
+Airline                  0
+Source                   0
+Source Name              0
+Destination              0
+Destination Name         0
+Departure Date & Time    0
+Arrival Date & Time      0
+Duration (hrs)           0
+Stopovers                0
+Aircraft Type            0
+Class                    0
+Booking Source           0
+Base Fare (BDT)          0
+Tax & Surcharge (BDT)    0
+Total Fare (BDT)         0
+Seasonality              0
+Days Before Departure    0
+dtype: int64
+2026-02-12 10:20:38 | src.data_loader | INFO | Duplicate rows: 0
+2026-02-12 10:20:39 | src.data_cleaning | INFO | Starting data cleaning. Original shape: (57000, 17)
+2026-02-12 10:20:39 | src.data_cleaning | INFO | Missing values before imputation:
+Series([], dtype: int64)
+2026-02-12 10:20:39 | src.data_cleaning | INFO | Converted 'Total Fare (BDT)' to float
+2026-02-12 10:20:39 | src.data_cleaning | INFO | Converted 'Departure Date & Time' to datetime
+2026-02-12 10:20:39 | src.data_cleaning | INFO | Converted 'Arrival Date & Time' to datetime
+2026-02-12 10:20:40 | src.data_cleaning | INFO | No duplicate rows found
+2026-02-12 10:20:40 | src.data_cleaning | INFO | Data cleaning complete. Final shape: (57000, 17)
+2026-02-12 10:20:40 | src.eda | INFO | Fare summary by airline:
+                               Mean    Median       Std      Min        Max  \
+Airline                                                                       
+Turkish Airlines           75547.27  43172.68  86133.38  1842.79  558987.33   
+AirAsia                    74534.39  42763.82  85962.63  1804.13  415248.03   
+Cathay Pacific             73325.09  46282.46  83285.51  1805.89  419822.09   
+Thai Airways               72845.79  42898.83  83424.34  1814.62  447814.56   
+Malaysian Airlines         72775.18  41938.11  82382.28  1872.76  482855.60   
+IndiGo                     72504.43  42018.49  83581.70  1809.27  524278.76   
+Air India                  72474.18  42429.62  83772.26  1816.37  404646.53   
+US-Bangla Airlines         72088.29  41255.33  82114.58  1801.20  437270.96   
+Kuwait Airways             71988.28  39584.26  83430.85  1806.92  458420.04   
+Etihad Airways             71785.24  43723.22  80227.15  1828.22  472869.99   
+Gulf Air                   71458.16  40052.63  81630.29  1808.64  395837.99   
+SriLankan Airlines         71265.26  43909.24  81939.72  1866.57  443458.48   
+British Airways            70555.54  41236.30  80049.76  1846.02  522606.37   
+Biman Bangladesh Airlines  70192.97  40733.36  81289.83  1854.06  489089.92   
+Emirates                   70106.15  41478.51  80542.71  1840.50  473812.80   
+Air Arabia                 69924.01  42120.80  80842.74  1805.98  446442.77   
+Qatar Airways              69865.54  39825.02  82311.08  1873.83  474667.25   
+Lufthansa                  69293.16  39742.19  81758.78  1857.85  427283.38   
+Saudia                     69270.68  39216.05  80651.26  1817.87  493383.97   
+FlyDubai                   68987.69  41314.78  79552.34  1818.95  417567.16   
+Air Astra                  68497.41  40507.21  78243.99  1872.59  459992.38   
+NovoAir                    68350.86  40191.82  78680.99  1800.98  453434.45   
+Singapore Airlines         68323.93  38440.59  79841.15  1819.18  405929.31   
+Vistara                    68108.24  38868.81  79926.24  1984.18  546970.92   
+
+                           Count  
+Airline                           
+Turkish Airlines            2220  
+AirAsia                     2312  
+Cathay Pacific              2282  
+Thai Airways                2316  
+Malaysian Airlines          2292  
+IndiGo                      2223  
+Air India                   2280  
+US-Bangla Airlines          4496  
+Kuwait Airways              2262  
+Etihad Airways              2267  
+Gulf Air                    2231  
+SriLankan Airlines          2201  
+British Airways             2209  
+Biman Bangladesh Airlines   2344  
+Emirates                    2327  
+Air Arabia                  2217  
+Qatar Airways               2267  
+Lufthansa                   2368  
+Saudia                      2321  
+FlyDubai                    2346  
+Air Astra                   2304  
+NovoAir                     2268  
+Singapore Airlines          2279  
+Vistara                     2368  
+2026-02-12 10:20:40 | src.eda | INFO | KPI - avg_fare_per_airline: {'Air Arabia': 69924.0069653591, 'Air Astra': 68497.40780385124, 'Air India': 72474.17841927757, 'AirAsia': 74534.39065085599, 'Biman Bangladesh Airlines': 70192.96928740495, 'British Airways': 70555.53620528667, 'Cathay Pacific': 73325.09112407768, 'Emirates': 70106.14941295658, 'Etihad Airways': 71785.24204541481, 'FlyDubai': 68987.68920579819, 'Gulf Air': 71458.16382764814, 'IndiGo': 72504.43312224906, 'Kuwait Airways': 71988.27610740755, 'Lufthansa': 69293.16387889728, 'Malaysian Airlines': 72775.18020054615, 'NovoAir': 68350.8592477514, 'Qatar Airways': 69865.53648745059, 'Saudia': 69270.67612310106, 'Singapore Airlines': 68323.93091354895, 'SriLankan Airlines': 71265.261153516, 'Thai Airways': 72845.78999276276, 'Turkish Airlines': 75547.2686286511, 'US-Bangla Airlines': 72088.28902479199, 'Vistara': 68108.2388436122}
+2026-02-12 10:20:40 | src.eda | INFO | KPI - most_expensive_airline: Turkish Airlines
+2026-02-12 10:20:40 | src.eda | INFO | KPI - cheapest_airline: Vistara
+2026-02-12 10:20:40 | src.eda | INFO | KPI - most_popular_route: RJH -> SIN
+2026-02-12 10:20:40 | src.eda | INFO | KPI - popular_route_count: 417
+2026-02-12 10:20:40 | src.eda | INFO | KPI - top_5_expensive_routes: {'SPD -> BKK': 117951.57234699473, 'CXB -> YYZ': 117848.70974427456, 'CXB -> LHR': 116667.65437664649, 'CXB -> JFK': 116476.31160148268, 'BZL -> JFK': 115968.43628519747}
+2026-02-12 10:20:40 | src.eda | INFO | KPI - seasonal_variation: {'Eid': 91560.02323587237, 'Hajj': 97144.47105794861, 'Regular': 68077.2710292717, 'Winter Holidays': 79676.73787707875}
+2026-02-12 10:20:40 | src.eda | INFO | KPI - avg_fare_by_days_before_departure: {1: 89037.18751902522, 2: 98731.02717580326, 3: 95969.17523989924, 4: 87029.44886986408, 5: 74148.2213806876, 6: 72921.97451529064, 7: 83033.3972497059, 8: 71796.13492802244, 9: 81540.02544209683, 10: 70558.83506931912, 11: 79397.77130098233, 12: 83226.97817346123, 13: 77791.74483338796, 14: 68891.65085615394, 15: 73916.8177738478, 16: 77117.12947920371, 17: 77573.41579050175, 18: 75615.8794904919, 19: 80337.69009953248, 20: 74666.50516709729, 21: 77827.64651097867, 22: 84165.3930129524, 23: 79413.639453546, 24: 81677.96561803271, 25: 70070.79771111906, 26: 75104.75780306823, 27: 76862.23927869175, 28: 83630.20635510074, 29: 77798.52691923043, 30: 74490.28147379907, 31: 75696.63564426797, 32: 68010.64851070166, 33: 67537.67881615611, 34: 70744.6171586971, 35: 72871.3709124489, 36: 73577.92279865024, 37: 67500.37178432423, 38: 74549.68205721537, 39: 68152.9195087839, 40: 69020.86989288744, 41: 76653.12888476677, 42: 68384.21409833958, 43: 63166.4859445075, 44: 76545.984787865, 45: 68273.7089312145, 46: 68017.7679508233, 47: 77376.22843505206, 48: 65295.644568576696, 49: 73728.9393257213, 50: 75646.44883193477, 51: 67771.4910024643, 52: 71133.49263981864, 53: 69969.27670932046, 54: 71062.45664285557, 55: 68935.9602984208, 56: 69145.47855340863, 57: 70384.11075997268, 58: 72765.33938040082, 59: 72466.26462791159, 60: 59898.16818099847, 61: 64607.67515864416, 62: 61113.859018574534, 63: 69552.3289647291, 64: 65414.637293634245, 65: 59509.030397644245, 66: 64030.8493193015, 67: 65710.85427157674, 68: 60351.30477079268, 69: 67734.07332161874, 70: 61300.60345940113, 71: 62138.94564796157, 72: 64887.48980608373, 73: 62580.05031946492, 74: 61110.00836410982, 75: 64818.43870619919, 76: 63583.29317849751, 77: 60201.50494814081, 78: 67582.04694472828, 79: 61178.56855645539, 80: 63590.28007321153, 81: 61424.59117762502, 82: 64924.67901135707, 83: 67776.55080443983, 84: 61137.74793174599, 85: 56767.87132964555, 86: 64470.086097375046, 87: 61727.514618772184, 88: 63798.7956043002, 89: 63122.1605823566, 90: 66628.266437846}
+2026-02-12 10:20:42 | src.eda | INFO | Fare distribution plotted. Mean: 71030.32, Median: 41307.54
+2026-02-12 10:20:43 | src.eda | INFO | Highest avg fare: Turkish Airlines at 75547.27
+2026-02-12 10:20:44 | src.eda | INFO | Seasonal fare variation plotted.
+2026-02-12 10:20:45 | src.eda | INFO | Highly correlated pairs (>0.8): [('Base Fare (BDT)', 'Tax & Surcharge (BDT)', np.float64(0.9779865674758875)), ('Base Fare (BDT)', 'Total Fare (BDT)', np.float64(0.9978418381570167)), ('Tax & Surcharge (BDT)', 'Total Fare (BDT)', np.float64(0.9821724652128447))]
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Starting feature engineering pipeline...
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Creating date features from 'Departure Date & Time'
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Created date features: Month, Day, Weekday, Hour, Season
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Dropping datetime columns: ['Departure Date & Time', 'Arrival Date & Time']
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Encoding categorical features using 'onehot' strategy
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Categorical columns to encode: ['Airline', 'Source', 'Source Name', 'Destination', 'Destination Name', 'Stopovers', 'Aircraft Type', 'Class', 'Booking Source', 'Seasonality', 'Route_Combined', 'Season']
+2026-02-12 10:20:45 | src.feature_engineering | INFO | One-hot encoded 12 columns
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Scaling 8 numerical features using 'standard' scaler
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Scaled features: ['Duration (hrs)', 'Base Fare (BDT)', 'Tax & Surcharge (BDT)', 'Days Before Departure', 'Month', 'Day', 'Weekday', 'Hour']
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Train/Test split: 45600 / 11400 samples
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Train ratio: 80.0%, Test ratio: 20.0%
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Total features after engineering: 250
+2026-02-12 10:20:45 | src.feature_engineering | INFO | Feature engineering pipeline completed
+2026-02-12 10:20:46 | src.models | INFO | ============================================================
+2026-02-12 10:20:46 | src.models | INFO | TRAINING: Linear Regression
+2026-02-12 10:20:46 | src.models | INFO | ============================================================
+2026-02-12 10:20:47 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:20:54 | src.models | INFO | Training Complete - R2: 0.9968
+2026-02-12 10:20:54 | src.models | INFO | Test Results - R2: 0.9969, RMSE: 4566.96, MAE: 1721.62
+2026-02-12 10:20:54 | src.models | INFO | Cross-Validation R2: 0.9967 (+/- 0.0002)
+2026-02-12 10:20:56 | src.models | INFO | ============================================================
+2026-02-12 10:20:56 | src.models | INFO | TRAINING: Ridge Regression (alpha=1.0)
+2026-02-12 10:20:56 | src.models | INFO | ============================================================
+2026-02-12 10:20:57 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:20:59 | src.models | INFO | Training Complete - R2: 0.9968
+2026-02-12 10:20:59 | src.models | INFO | Test Results - R2: 0.9969, RMSE: 4566.93, MAE: 1723.42
+2026-02-12 10:20:59 | src.models | INFO | Cross-Validation R2: 0.9967 (+/- 0.0002)
+2026-02-12 10:21:00 | src.models | INFO | ============================================================
+2026-02-12 10:21:00 | src.models | INFO | TRAINING: Lasso Regression (alpha=1.0)
+2026-02-12 10:21:00 | src.models | INFO | ============================================================
+2026-02-12 10:22:27 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:28:05 | src.models | INFO | Training Complete - R2: 0.9968
+2026-02-12 10:28:05 | src.models | INFO | Test Results - R2: 0.9969, RMSE: 4563.89, MAE: 1709.29
+2026-02-12 10:28:05 | src.models | INFO | Cross-Validation R2: 0.9967 (+/- 0.0002)
+2026-02-12 10:28:06 | src.models | INFO | ============================================================
+2026-02-12 10:28:06 | src.models | INFO | TRAINING: Decision Tree (max_depth=10)
+2026-02-12 10:28:06 | src.models | INFO | ============================================================
+2026-02-12 10:28:09 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:28:17 | src.models | INFO | Training Complete - R2: 1.0000
+2026-02-12 10:28:17 | src.models | INFO | Test Results - R2: 0.9999, RMSE: 745.15, MAE: 339.39
+2026-02-12 10:28:17 | src.models | INFO | Cross-Validation R2: 0.9999 (+/- 0.0001)
+2026-02-12 10:28:20 | src.models | INFO | ============================================================
+2026-02-12 10:28:20 | src.models | INFO | TRAINING: Random Forest (n_estimators=100, max_depth=10)
+2026-02-12 10:28:20 | src.models | INFO | ============================================================
+2026-02-12 10:28:43 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:29:56 | src.models | INFO | Training Complete - R2: 1.0000
+2026-02-12 10:29:56 | src.models | INFO | Test Results - R2: 1.0000, RMSE: 520.87, MAE: 141.44
+2026-02-12 10:29:56 | src.models | INFO | Cross-Validation R2: 0.9999 (+/- 0.0001)
+2026-02-12 10:29:57 | src.models | INFO | ============================================================
+2026-02-12 10:29:57 | src.models | INFO | TRAINING: Gradient Boosting (n_estimators=100, max_depth=5, lr=0.1)
+2026-02-12 10:29:57 | src.models | INFO | ============================================================
+2026-02-12 10:30:52 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:34:54 | src.models | INFO | Training Complete - R2: 1.0000
+2026-02-12 10:34:54 | src.models | INFO | Test Results - R2: 1.0000, RMSE: 420.42, MAE: 228.08
+2026-02-12 10:34:54 | src.models | INFO | Cross-Validation R2: 1.0000 (+/- 0.0000)
+2026-02-12 10:34:56 | src.models | INFO | ============================================================
+2026-02-12 10:34:56 | src.models | INFO | TRAINING: XGBoost (n_estimators=100, max_depth=5, lr=0.1)
+2026-02-12 10:34:56 | src.models | INFO | ============================================================
+2026-02-12 10:35:21 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 10:35:55 | src.models | INFO | Training Complete - R2: 0.9999
+2026-02-12 10:35:55 | src.models | INFO | Test Results - R2: 0.9997, RMSE: 1516.04, MAE: 409.02
+2026-02-12 10:35:55 | src.models | INFO | Cross-Validation R2: 0.9997 (+/- 0.0001)
+2026-02-12 10:35:58 | src.optimization | INFO | Starting Random Forest hyperparameter tuning...
+2026-02-12 10:55:11 | src.optimization | INFO | Best Random Forest params: {'n_estimators': 200, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_depth': None}
+2026-02-12 10:55:11 | src.optimization | INFO | Best CV R2 score: 0.9999
+2026-02-12 10:55:11 | src.optimization | INFO | Tuned Random Forest - R2: 1.0000, RMSE: 499.21
+2026-02-12 10:55:12 | src.optimization | INFO | Starting Gradient Boosting hyperparameter tuning...
+2026-02-12 11:34:32 | src.optimization | INFO | Best Gradient Boosting params: {'n_estimators': 150, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_depth': 5, 'learning_rate': 0.1}
+2026-02-12 11:34:32 | src.optimization | INFO | Best CV R2 score: 0.9999
+2026-02-12 11:34:32 | src.optimization | INFO | Tuned Gradient Boosting - R2: 1.0000, RMSE: 380.18
+2026-02-12 11:34:34 | src.optimization | INFO | Comparing Ridge and Lasso regularization effects...
+2026-02-12 14:02:16 | src.data_loader | INFO | Loading dataset from: C:\Users\DanielAgudeyDoe\Desktop\Lib\Course Projects\Amalitech-Machine-Learning\project\data\raw\Flight_Price_Dataset_of_Bangladesh.csv
+2026-02-12 14:02:17 | src.data_loader | INFO | Dataset loaded successfully: 57000 rows, 17 columns
+2026-02-12 14:02:17 | src.data_loader | INFO | Inspecting dataset...
+2026-02-12 14:02:17 | src.data_loader | INFO | Shape: (57000, 17)
+2026-02-12 14:02:17 | src.data_loader | INFO | Data types:
+Airline                      str
+Source                       str
+Source Name                  str
+Destination                  str
+Destination Name             str
+Departure Date & Time        str
+Arrival Date & Time          str
+Duration (hrs)           float64
+Stopovers                    str
+Aircraft Type                str
+Class                        str
+Booking Source               str
+Base Fare (BDT)          float64
+Tax & Surcharge (BDT)    float64
+Total Fare (BDT)         float64
+Seasonality                  str
+Days Before Departure      int64
+dtype: object
+2026-02-12 14:02:17 | src.data_loader | INFO | Missing values:
+Airline                  0
+Source                   0
+Source Name              0
+Destination              0
+Destination Name         0
+Departure Date & Time    0
+Arrival Date & Time      0
+Duration (hrs)           0
+Stopovers                0
+Aircraft Type            0
+Class                    0
+Booking Source           0
+Base Fare (BDT)          0
+Tax & Surcharge (BDT)    0
+Total Fare (BDT)         0
+Seasonality              0
+Days Before Departure    0
+dtype: int64
+2026-02-12 14:02:18 | src.data_loader | INFO | Duplicate rows: 0
+2026-02-12 14:02:19 | src.data_cleaning | INFO | Starting data cleaning. Original shape: (57000, 17)
+2026-02-12 14:02:19 | src.data_cleaning | INFO | Missing values before imputation:
+Series([], dtype: int64)
+2026-02-12 14:02:19 | src.data_cleaning | INFO | Converted 'Total Fare (BDT)' to float
+2026-02-12 14:02:19 | src.data_cleaning | INFO | Converted 'Departure Date & Time' to datetime
+2026-02-12 14:02:19 | src.data_cleaning | INFO | Converted 'Arrival Date & Time' to datetime
+2026-02-12 14:02:20 | src.data_cleaning | INFO | No duplicate rows found
+2026-02-12 14:02:20 | src.data_cleaning | INFO | Data cleaning complete. Final shape: (57000, 17)
+2026-02-12 14:02:21 | src.eda | INFO | Fare summary by airline:
+                               Mean    Median       Std      Min        Max  \
+Airline                                                                       
+Turkish Airlines           75547.27  43172.68  86133.38  1842.79  558987.33   
+AirAsia                    74534.39  42763.82  85962.63  1804.13  415248.03   
+Cathay Pacific             73325.09  46282.46  83285.51  1805.89  419822.09   
+Thai Airways               72845.79  42898.83  83424.34  1814.62  447814.56   
+Malaysian Airlines         72775.18  41938.11  82382.28  1872.76  482855.60   
+IndiGo                     72504.43  42018.49  83581.70  1809.27  524278.76   
+Air India                  72474.18  42429.62  83772.26  1816.37  404646.53   
+US-Bangla Airlines         72088.29  41255.33  82114.58  1801.20  437270.96   
+Kuwait Airways             71988.28  39584.26  83430.85  1806.92  458420.04   
+Etihad Airways             71785.24  43723.22  80227.15  1828.22  472869.99   
+Gulf Air                   71458.16  40052.63  81630.29  1808.64  395837.99   
+SriLankan Airlines         71265.26  43909.24  81939.72  1866.57  443458.48   
+British Airways            70555.54  41236.30  80049.76  1846.02  522606.37   
+Biman Bangladesh Airlines  70192.97  40733.36  81289.83  1854.06  489089.92   
+Emirates                   70106.15  41478.51  80542.71  1840.50  473812.80   
+Air Arabia                 69924.01  42120.80  80842.74  1805.98  446442.77   
+Qatar Airways              69865.54  39825.02  82311.08  1873.83  474667.25   
+Lufthansa                  69293.16  39742.19  81758.78  1857.85  427283.38   
+Saudia                     69270.68  39216.05  80651.26  1817.87  493383.97   
+FlyDubai                   68987.69  41314.78  79552.34  1818.95  417567.16   
+Air Astra                  68497.41  40507.21  78243.99  1872.59  459992.38   
+NovoAir                    68350.86  40191.82  78680.99  1800.98  453434.45   
+Singapore Airlines         68323.93  38440.59  79841.15  1819.18  405929.31   
+Vistara                    68108.24  38868.81  79926.24  1984.18  546970.92   
+
+                           Count  
+Airline                           
+Turkish Airlines            2220  
+AirAsia                     2312  
+Cathay Pacific              2282  
+Thai Airways                2316  
+Malaysian Airlines          2292  
+IndiGo                      2223  
+Air India                   2280  
+US-Bangla Airlines          4496  
+Kuwait Airways              2262  
+Etihad Airways              2267  
+Gulf Air                    2231  
+SriLankan Airlines          2201  
+British Airways             2209  
+Biman Bangladesh Airlines   2344  
+Emirates                    2327  
+Air Arabia                  2217  
+Qatar Airways               2267  
+Lufthansa                   2368  
+Saudia                      2321  
+FlyDubai                    2346  
+Air Astra                   2304  
+NovoAir                     2268  
+Singapore Airlines          2279  
+Vistara                     2368  
+2026-02-12 14:02:21 | src.eda | INFO | KPI - avg_fare_per_airline: {'Air Arabia': 69924.0069653591, 'Air Astra': 68497.40780385124, 'Air India': 72474.17841927757, 'AirAsia': 74534.39065085599, 'Biman Bangladesh Airlines': 70192.96928740495, 'British Airways': 70555.53620528667, 'Cathay Pacific': 73325.09112407768, 'Emirates': 70106.14941295658, 'Etihad Airways': 71785.24204541481, 'FlyDubai': 68987.68920579819, 'Gulf Air': 71458.16382764814, 'IndiGo': 72504.43312224906, 'Kuwait Airways': 71988.27610740755, 'Lufthansa': 69293.16387889728, 'Malaysian Airlines': 72775.18020054615, 'NovoAir': 68350.8592477514, 'Qatar Airways': 69865.53648745059, 'Saudia': 69270.67612310106, 'Singapore Airlines': 68323.93091354895, 'SriLankan Airlines': 71265.261153516, 'Thai Airways': 72845.78999276276, 'Turkish Airlines': 75547.2686286511, 'US-Bangla Airlines': 72088.28902479199, 'Vistara': 68108.2388436122}
+2026-02-12 14:02:21 | src.eda | INFO | KPI - most_expensive_airline: Turkish Airlines
+2026-02-12 14:02:21 | src.eda | INFO | KPI - cheapest_airline: Vistara
+2026-02-12 14:02:21 | src.eda | INFO | KPI - most_popular_route: RJH -> SIN
+2026-02-12 14:02:21 | src.eda | INFO | KPI - popular_route_count: 417
+2026-02-12 14:02:21 | src.eda | INFO | KPI - top_5_expensive_routes: {'SPD -> BKK': 117951.57234699473, 'CXB -> YYZ': 117848.70974427456, 'CXB -> LHR': 116667.65437664649, 'CXB -> JFK': 116476.31160148268, 'BZL -> JFK': 115968.43628519747}
+2026-02-12 14:02:21 | src.eda | INFO | KPI - seasonal_variation: {'Eid': 91560.02323587237, 'Hajj': 97144.47105794861, 'Regular': 68077.2710292717, 'Winter Holidays': 79676.73787707875}
+2026-02-12 14:02:21 | src.eda | INFO | KPI - avg_fare_by_days_before_departure: {1: 89037.18751902522, 2: 98731.02717580326, 3: 95969.17523989924, 4: 87029.44886986408, 5: 74148.2213806876, 6: 72921.97451529064, 7: 83033.3972497059, 8: 71796.13492802244, 9: 81540.02544209683, 10: 70558.83506931912, 11: 79397.77130098233, 12: 83226.97817346123, 13: 77791.74483338796, 14: 68891.65085615394, 15: 73916.8177738478, 16: 77117.12947920371, 17: 77573.41579050175, 18: 75615.8794904919, 19: 80337.69009953248, 20: 74666.50516709729, 21: 77827.64651097867, 22: 84165.3930129524, 23: 79413.639453546, 24: 81677.96561803271, 25: 70070.79771111906, 26: 75104.75780306823, 27: 76862.23927869175, 28: 83630.20635510074, 29: 77798.52691923043, 30: 74490.28147379907, 31: 75696.63564426797, 32: 68010.64851070166, 33: 67537.67881615611, 34: 70744.6171586971, 35: 72871.3709124489, 36: 73577.92279865024, 37: 67500.37178432423, 38: 74549.68205721537, 39: 68152.9195087839, 40: 69020.86989288744, 41: 76653.12888476677, 42: 68384.21409833958, 43: 63166.4859445075, 44: 76545.984787865, 45: 68273.7089312145, 46: 68017.7679508233, 47: 77376.22843505206, 48: 65295.644568576696, 49: 73728.9393257213, 50: 75646.44883193477, 51: 67771.4910024643, 52: 71133.49263981864, 53: 69969.27670932046, 54: 71062.45664285557, 55: 68935.9602984208, 56: 69145.47855340863, 57: 70384.11075997268, 58: 72765.33938040082, 59: 72466.26462791159, 60: 59898.16818099847, 61: 64607.67515864416, 62: 61113.859018574534, 63: 69552.3289647291, 64: 65414.637293634245, 65: 59509.030397644245, 66: 64030.8493193015, 67: 65710.85427157674, 68: 60351.30477079268, 69: 67734.07332161874, 70: 61300.60345940113, 71: 62138.94564796157, 72: 64887.48980608373, 73: 62580.05031946492, 74: 61110.00836410982, 75: 64818.43870619919, 76: 63583.29317849751, 77: 60201.50494814081, 78: 67582.04694472828, 79: 61178.56855645539, 80: 63590.28007321153, 81: 61424.59117762502, 82: 64924.67901135707, 83: 67776.55080443983, 84: 61137.74793174599, 85: 56767.87132964555, 86: 64470.086097375046, 87: 61727.514618772184, 88: 63798.7956043002, 89: 63122.1605823566, 90: 66628.266437846}
+2026-02-12 14:02:24 | src.eda | INFO | Fare distribution plotted. Mean: 71030.32, Median: 41307.54
+2026-02-12 14:02:25 | src.eda | INFO | Highest avg fare: Turkish Airlines at 75547.27
+2026-02-12 14:02:28 | src.eda | INFO | Seasonal fare variation plotted.
+2026-02-12 14:02:29 | src.eda | INFO | Highly correlated pairs (>0.8): [('Base Fare (BDT)', 'Tax & Surcharge (BDT)', np.float64(0.9779865674758875)), ('Base Fare (BDT)', 'Total Fare (BDT)', np.float64(0.9978418381570167)), ('Tax & Surcharge (BDT)', 'Total Fare (BDT)', np.float64(0.9821724652128447))]
+2026-02-12 14:02:35 | src.feature_engineering | INFO | Starting feature engineering pipeline...
+2026-02-12 14:02:35 | src.feature_engineering | INFO | Creating date features from 'Departure Date & Time'
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Created date features: Month, Day, Weekday, Hour, Season
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Dropping datetime columns: ['Departure Date & Time', 'Arrival Date & Time']
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Encoding categorical features using 'onehot' strategy
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Categorical columns to encode: ['Airline', 'Source', 'Source Name', 'Destination', 'Destination Name', 'Stopovers', 'Aircraft Type', 'Class', 'Booking Source', 'Seasonality', 'Route_Combined', 'Season']
+2026-02-12 14:02:36 | src.feature_engineering | INFO | One-hot encoded 12 columns
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Scaling 8 numerical features using 'standard' scaler
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Scaled features: ['Duration (hrs)', 'Base Fare (BDT)', 'Tax & Surcharge (BDT)', 'Days Before Departure', 'Month', 'Day', 'Weekday', 'Hour']
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Train/Test split: 45600 / 11400 samples
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Train ratio: 80.0%, Test ratio: 20.0%
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Total features after engineering: 250
+2026-02-12 14:02:36 | src.feature_engineering | INFO | Feature engineering pipeline completed
+2026-02-12 14:02:46 | src.models | INFO | ============================================================
+2026-02-12 14:02:46 | src.models | INFO | TRAINING: Linear Regression
+2026-02-12 14:02:46 | src.models | INFO | ============================================================
+2026-02-12 14:02:50 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 14:03:02 | src.models | INFO | Training Complete - R2: 0.9968
+2026-02-12 14:03:02 | src.models | INFO | Test Results - R2: 0.9969, RMSE: 4566.96, MAE: 1721.62
+2026-02-12 14:03:02 | src.models | INFO | Cross-Validation R2: 0.9967 (+/- 0.0002)
+2026-02-12 14:03:06 | src.models | INFO | ============================================================
+2026-02-12 14:03:06 | src.models | INFO | TRAINING: Ridge Regression (alpha=1.0)
+2026-02-12 14:03:06 | src.models | INFO | ============================================================
+2026-02-12 14:03:08 | src.models | INFO | Performing 5-fold cross-validation...
+2026-02-12 14:03:13 | src.models | INFO | Training Complete - R2: 0.9968
+2026-02-12 14:03:13 | src.models | INFO | Test Results - R2: 0.9969, RMSE: 4566.93, MAE: 1723.42
+2026-02-12 14:03:13 | src.models | INFO | Cross-Validation R2: 0.9967 (+/- 0.0002)
+2026-02-12 14:03:16 | src.models | INFO | ============================================================
+2026-02-12 14:03:16 | src.models | INFO | TRAINING: Lasso Regression (alpha=1.0)
+2026-02-12 14:03:16 | src.models | INFO | ============================================================
+2026-02-12 14:07:24 | src.models | INFO | Performing 5-fold cross-validation...

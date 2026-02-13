@@ -1,0 +1,248 @@
+Duration (hrs)
+Days Before Departure
+Month
+Day
+Weekday
+Hour
+Airline_Air Astra
+Airline_Air India
+Airline_AirAsia
+Airline_Biman Bangladesh Airlines
+Airline_British Airways
+Airline_Cathay Pacific
+Airline_Emirates
+Airline_Etihad Airways
+Airline_FlyDubai
+Airline_Gulf Air
+Airline_IndiGo
+Airline_Kuwait Airways
+Airline_Lufthansa
+Airline_Malaysian Airlines
+Airline_NovoAir
+Airline_Qatar Airways
+Airline_Saudia
+Airline_Singapore Airlines
+Airline_SriLankan Airlines
+Airline_Thai Airways
+Airline_Turkish Airlines
+Airline_US-Bangla Airlines
+Airline_Vistara
+Source_CGP
+Source_CXB
+Source_DAC
+Source_JSR
+Source_RJH
+Source_SPD
+Source_ZYL
+Source Name_Cox's Bazar Airport
+Source Name_Hazrat Shahjalal International Airport, Dhaka
+Source Name_Jessore Airport
+Source Name_Osmani International Airport, Sylhet
+Source Name_Saidpur Airport
+Source Name_Shah Amanat International Airport, Chittagong
+Source Name_Shah Makhdum Airport, Rajshahi
+Destination_BZL
+Destination_CCU
+Destination_CGP
+Destination_CXB
+Destination_DAC
+Destination_DEL
+Destination_DOH
+Destination_DXB
+Destination_IST
+Destination_JED
+Destination_JFK
+Destination_JSR
+Destination_KUL
+Destination_LHR
+Destination_RJH
+Destination_SIN
+Destination_SPD
+Destination_YYZ
+Destination_ZYL
+Destination Name_Cox's Bazar Airport
+Destination Name_Dubai International Airport
+Destination Name_Hamad International Airport, Doha
+Destination Name_Hazrat Shahjalal International Airport, Dhaka
+Destination Name_Indira Gandhi International Airport, Delhi
+Destination Name_Istanbul Airport
+Destination Name_Jessore Airport
+Destination Name_John F. Kennedy International Airport, New York
+Destination Name_King Abdulaziz International Airport, Jeddah
+Destination Name_Kuala Lumpur International Airport
+Destination Name_London Heathrow Airport
+Destination Name_Netaji Subhas Chandra Bose International Airport, Kolkata
+Destination Name_Osmani International Airport, Sylhet
+Destination Name_Saidpur Airport
+Destination Name_Shah Amanat International Airport, Chittagong
+Destination Name_Shah Makhdum Airport, Rajshahi
+Destination Name_Singapore Changi Airport
+Destination Name_Suvarnabhumi Airport, Bangkok
+Destination Name_Toronto Pearson International Airport
+Stopovers_2 Stops
+Stopovers_Direct
+Aircraft Type_Airbus A350
+Aircraft Type_Boeing 737
+Aircraft Type_Boeing 777
+Aircraft Type_Boeing 787
+Class_Economy
+Class_First Class
+Booking Source_Online Website
+Booking Source_Travel Agency
+Seasonality_Hajj
+Seasonality_Regular
+Seasonality_Winter Holidays
+Route_Combined_BZL -> CCU
+Route_Combined_BZL -> CGP
+Route_Combined_BZL -> CXB
+Route_Combined_BZL -> DAC
+Route_Combined_BZL -> DEL
+Route_Combined_BZL -> DOH
+Route_Combined_BZL -> DXB
+Route_Combined_BZL -> IST
+Route_Combined_BZL -> JED
+Route_Combined_BZL -> JFK
+Route_Combined_BZL -> JSR
+Route_Combined_BZL -> KUL
+Route_Combined_BZL -> LHR
+Route_Combined_BZL -> RJH
+Route_Combined_BZL -> SIN
+Route_Combined_BZL -> SPD
+Route_Combined_BZL -> YYZ
+Route_Combined_BZL -> ZYL
+Route_Combined_CGP -> BKK
+Route_Combined_CGP -> BZL
+Route_Combined_CGP -> CCU
+Route_Combined_CGP -> CXB
+Route_Combined_CGP -> DAC
+Route_Combined_CGP -> DEL
+Route_Combined_CGP -> DOH
+Route_Combined_CGP -> DXB
+Route_Combined_CGP -> IST
+Route_Combined_CGP -> JED
+Route_Combined_CGP -> JFK
+Route_Combined_CGP -> JSR
+Route_Combined_CGP -> KUL
+Route_Combined_CGP -> LHR
+Route_Combined_CGP -> RJH
+Route_Combined_CGP -> SIN
+Route_Combined_CGP -> SPD
+Route_Combined_CGP -> YYZ
+Route_Combined_CGP -> ZYL
+Route_Combined_CXB -> BKK
+Route_Combined_CXB -> BZL
+Route_Combined_CXB -> CCU
+Route_Combined_CXB -> CGP
+Route_Combined_CXB -> DAC
+Route_Combined_CXB -> DEL
+Route_Combined_CXB -> DOH
+Route_Combined_CXB -> DXB
+Route_Combined_CXB -> IST
+Route_Combined_CXB -> JED
+Route_Combined_CXB -> JFK
+Route_Combined_CXB -> JSR
+Route_Combined_CXB -> KUL
+Route_Combined_CXB -> LHR
+Route_Combined_CXB -> RJH
+Route_Combined_CXB -> SIN
+Route_Combined_CXB -> SPD
+Route_Combined_CXB -> YYZ
+Route_Combined_CXB -> ZYL
+Route_Combined_DAC -> BKK
+Route_Combined_DAC -> BZL
+Route_Combined_DAC -> CCU
+Route_Combined_DAC -> CGP
+Route_Combined_DAC -> CXB
+Route_Combined_DAC -> DEL
+Route_Combined_DAC -> DOH
+Route_Combined_DAC -> DXB
+Route_Combined_DAC -> IST
+Route_Combined_DAC -> JED
+Route_Combined_DAC -> JFK
+Route_Combined_DAC -> JSR
+Route_Combined_DAC -> KUL
+Route_Combined_DAC -> LHR
+Route_Combined_DAC -> RJH
+Route_Combined_DAC -> SIN
+Route_Combined_DAC -> SPD
+Route_Combined_DAC -> YYZ
+Route_Combined_DAC -> ZYL
+Route_Combined_JSR -> BKK
+Route_Combined_JSR -> BZL
+Route_Combined_JSR -> CCU
+Route_Combined_JSR -> CGP
+Route_Combined_JSR -> CXB
+Route_Combined_JSR -> DAC
+Route_Combined_JSR -> DEL
+Route_Combined_JSR -> DOH
+Route_Combined_JSR -> DXB
+Route_Combined_JSR -> IST
+Route_Combined_JSR -> JED
+Route_Combined_JSR -> JFK
+Route_Combined_JSR -> KUL
+Route_Combined_JSR -> LHR
+Route_Combined_JSR -> RJH
+Route_Combined_JSR -> SIN
+Route_Combined_JSR -> SPD
+Route_Combined_JSR -> YYZ
+Route_Combined_JSR -> ZYL
+Route_Combined_RJH -> BKK
+Route_Combined_RJH -> BZL
+Route_Combined_RJH -> CCU
+Route_Combined_RJH -> CGP
+Route_Combined_RJH -> CXB
+Route_Combined_RJH -> DAC
+Route_Combined_RJH -> DEL
+Route_Combined_RJH -> DOH
+Route_Combined_RJH -> DXB
+Route_Combined_RJH -> IST
+Route_Combined_RJH -> JED
+Route_Combined_RJH -> JFK
+Route_Combined_RJH -> JSR
+Route_Combined_RJH -> KUL
+Route_Combined_RJH -> LHR
+Route_Combined_RJH -> SIN
+Route_Combined_RJH -> SPD
+Route_Combined_RJH -> YYZ
+Route_Combined_RJH -> ZYL
+Route_Combined_SPD -> BKK
+Route_Combined_SPD -> BZL
+Route_Combined_SPD -> CCU
+Route_Combined_SPD -> CGP
+Route_Combined_SPD -> CXB
+Route_Combined_SPD -> DAC
+Route_Combined_SPD -> DEL
+Route_Combined_SPD -> DOH
+Route_Combined_SPD -> DXB
+Route_Combined_SPD -> IST
+Route_Combined_SPD -> JED
+Route_Combined_SPD -> JFK
+Route_Combined_SPD -> JSR
+Route_Combined_SPD -> KUL
+Route_Combined_SPD -> LHR
+Route_Combined_SPD -> RJH
+Route_Combined_SPD -> SIN
+Route_Combined_SPD -> YYZ
+Route_Combined_SPD -> ZYL
+Route_Combined_ZYL -> BKK
+Route_Combined_ZYL -> BZL
+Route_Combined_ZYL -> CCU
+Route_Combined_ZYL -> CGP
+Route_Combined_ZYL -> CXB
+Route_Combined_ZYL -> DAC
+Route_Combined_ZYL -> DEL
+Route_Combined_ZYL -> DOH
+Route_Combined_ZYL -> DXB
+Route_Combined_ZYL -> IST
+Route_Combined_ZYL -> JED
+Route_Combined_ZYL -> JFK
+Route_Combined_ZYL -> JSR
+Route_Combined_ZYL -> KUL
+Route_Combined_ZYL -> LHR
+Route_Combined_ZYL -> RJH
+Route_Combined_ZYL -> SIN
+Route_Combined_ZYL -> SPD
+Route_Combined_ZYL -> YYZ
+Season_Spring
+Season_Summer
+Season_Winter

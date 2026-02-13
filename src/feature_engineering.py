@@ -2,7 +2,7 @@
 
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.preprocessing import StandardScaler, LabelEncoder, RobustScaler
 from sklearn.model_selection import train_test_split
 from src.logger import get_logger
 
@@ -83,26 +83,45 @@ def encode_categorical_features(df: pd.DataFrame, strategy: str = 'onehot') -> p
     
     return df
 
-def scale_numerical_features(df: pd.DataFrame, columns: list = None, scaler_type: str = 'standard') -> tuple:
-    """Scale numerical columns. Return (scaled_df, fitted_scaler)."""
+def scale_numerical_features(df: pd.DataFrame, columns: list = None, scaler_type: str = 'robust') -> tuple:
+    """Scale numerical columns. Return (scaled_df, fitted_scaler).
+
+    Args:
+        df: DataFrame to scale
+        columns: List of columns to scale (default: all numeric except target)
+        scaler_type: Type of scaler to use
+            - 'robust' (RECOMMENDED): Uses median and IQR, resistant to outliers
+            - 'standard': Uses mean and std, sensitive to outliers
+            - 'minmax': Scales to [0,1], very sensitive to outliers
+
+    For flight price data, 'robust' is recommended due to outliers in pricing
+    (business class, last-minute bookings, peak seasons, etc.)
+    """
     price_col = get_price_column(df)
-    
+
     if columns is None:
         columns = df.select_dtypes(include=[np.number]).columns.tolist()
         if price_col in columns:
             columns.remove(price_col)
-    
+
     logger.info(f"Scaling {len(columns)} numerical features using '{scaler_type}' scaler")
-    
+
     if scaler_type == 'standard':
         scaler = StandardScaler()
-    else:
+        logger.info("Using StandardScaler (mean=0, std=1) - sensitive to outliers")
+    elif scaler_type == 'robust':
+        scaler = RobustScaler()
+        logger.info("Using RobustScaler (median, IQR) - resistant to outliers [RECOMMENDED]")
+    elif scaler_type == 'minmax':
         from sklearn.preprocessing import MinMaxScaler
         scaler = MinMaxScaler()
-    
+        logger.info("Using MinMaxScaler (range [0,1]) - very sensitive to outliers")
+    else:
+        raise ValueError(f"Unknown scaler_type: '{scaler_type}'. Choose 'robust', 'standard', or 'minmax'")
+
     df_scaled = df.copy()
     df_scaled[columns] = scaler.fit_transform(df[columns])
-    
+
     logger.info(f"Scaled features: {columns}")
     return df_scaled, scaler
 
@@ -157,7 +176,7 @@ def run_feature_pipeline(df: pd.DataFrame, target_col: str = None) -> tuple:
     if price_col in numeric_cols:
         numeric_cols.remove(price_col)
 
-    df_scaled, scaler = scale_numerical_features(df, columns=numeric_cols, scaler_type='standard')
+    df_scaled, scaler = scale_numerical_features(df, columns=numeric_cols, scaler_type='robust')
 
     X_train, X_test, y_train, y_test = split_data(df_scaled, target_col=price_col)
 
